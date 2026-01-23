@@ -16,7 +16,7 @@ public_subnet_azs = [
   "ap-northeast-2c"
 ]
 
-security_group_name = "katopia-docker_docker"
+alb_security_group_name = "katopia-docker-alb"
 spring_security_group_name = "katopia-docker-spring-sg"
 next_security_group_name   = "katopia-docker-next-sg"
 vpc_endpoint_security_group_name = "katopia-docker-vpce-sg"
@@ -105,24 +105,24 @@ alb_path_rules = [
 
 asg_spring_name                     = "katopia-docker-spring-asg"
 asg_spring_min_size                 = 1
-asg_spring_max_size                 = 2
-asg_spring_desired_capacity         = 2
+asg_spring_max_size                 = 1
+asg_spring_desired_capacity         = 1
 asg_spring_target_group_key         = "spring"
 asg_spring_health_check_type        = "ELB"
 asg_spring_health_check_grace_period = 300
 asg_spring_user_data                = null
-asg_spring_ami_id                   = null
+asg_spring_ami_id                   = "ami-0338dae0d60ba723b"
 asg_spring_instance_type            = null
 asg_spring_cpu_target_utilization   = 60
 
 asg_next_name                        = "katopia-docker-next-asg"
 asg_next_min_size                    = 1
-asg_next_max_size                    = 2
-asg_next_desired_capacity            = 2
+asg_next_max_size                    = 1
+asg_next_desired_capacity            = 1
 asg_next_target_group_key            = "next"
 asg_next_health_check_type           = "ELB"
 asg_next_health_check_grace_period   = 300
 asg_next_user_data                   = null
-asg_next_ami_id                      = null
+asg_next_ami_id                      = "ami-085a5c5173f8094cd"
 asg_next_instance_type               = null
 asg_next_cpu_target_utilization      = 60

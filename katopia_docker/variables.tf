@@ -29,8 +29,8 @@ variable "tags" {
   default     = {}
 }
 
-variable "security_group_name" {
-  description = "Name of the security group."
+variable "alb_security_group_name" {
+  description = "ALB security group name."
   type        = string
 }
 

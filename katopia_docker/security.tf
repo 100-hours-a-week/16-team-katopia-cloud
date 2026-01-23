@@ -1,8 +1,8 @@
-module "security" {
+module "alb_security" {
   source = "./modules/security"
 
   vpc_id        = module.network.vpc_id
-  name          = var.security_group_name
+  name          = var.alb_security_group_name
   ingress_rules = var.security_group_ingress_rules
   egress_rules  = var.security_group_egress_rules
   tags          = var.tags
@@ -19,9 +19,9 @@ module "spring_security" {
       from_port        = 8080
       to_port          = 8080
       protocol         = "tcp"
-      cidr_blocks      = []
+      cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
-      security_groups  = [module.security.security_group_id]
+      security_groups  = []
       prefix_list_ids  = []
       self             = false
     }
@@ -55,7 +55,7 @@ module "next_security" {
       protocol         = "tcp"
       cidr_blocks      = []
       ipv6_cidr_blocks = []
-      security_groups  = [module.security.security_group_id]
+      security_groups  = [module.alb_security.security_group_id]
       prefix_list_ids  = []
       self             = false
     }
