@@ -6,5 +6,9 @@ resource "aws_instance" "this" {
   key_name               = var.key_name
   iam_instance_profile   = var.iam_instance_profile
 
+  root_block_device {
+    volume_size = var.root_volume_size
+  }
+
   tags = merge(var.tags, { Name = "katopia-ec2-prod" })
 }

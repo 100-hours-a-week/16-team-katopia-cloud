@@ -55,12 +55,16 @@ security_group_egress_rules = [
 ]
 
 ami_id        = "ami-09847a9d9d71bd9f5"
-instance_type = "t3.small"
+instance_type = "t3.medium"
+root_volume_size = 20
 key_name      = "katopia"
 
 iam_role_name             = "katopia-ec2-prod-role"
 iam_instance_profile_name = "katopia-ec2-prod-profile"
 iam_managed_policy_arns = [
-  "arn:aws:iam::aws:policy/SecretsManagerReadWrite",
-  "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  "arn:aws:iam::aws:policy/CloudWatchFullAccess",
+  "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
+  "arn:aws:iam::aws:policy/AWSSecretsManagerClientReadOnlyAccess",
+  "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+  "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 ]

@@ -64,6 +64,11 @@ variable "instance_type" {
   type        = string
 }
 
+variable "root_volume_size" {
+  description = "Root EBS volume size (GiB)."
+  type        = number
+}
+
 variable "key_name" {
   description = "Existing EC2 key pair name for SSH access."
   type        = string
