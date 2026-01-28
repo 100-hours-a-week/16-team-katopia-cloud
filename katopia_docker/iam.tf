@@ -8,3 +8,12 @@ module "iam" {
   inline_policy_json    = var.iam_inline_policy_json
   tags                  = var.tags
 }
+
+module "monitoring_iam" {
+  source = "./modules/iam"
+
+  role_name             = var.monitoring_iam_role_name
+  instance_profile_name = var.monitoring_iam_instance_profile_name
+  managed_policy_arns   = var.monitoring_iam_managed_policy_arns
+  tags                  = var.tags
+}

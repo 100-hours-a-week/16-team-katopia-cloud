@@ -65,6 +65,14 @@ ami_id        = "ami-03fd85ef2fae79c05"
 instance_type = "t3.small"
 key_name      = "community"
 
+monitoring_ami_id               = "ami-07a52deed809c6cbf"
+monitoring_security_group_name  = "katopia-docker-monitoring-sg"
+monitoring_iam_role_name             = "katopia-docker-monitoring-ec2-role"
+monitoring_iam_instance_profile_name = "katopia-docker-monitoring-ec2-profile"
+monitoring_iam_managed_policy_arns = [
+  "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
+]
+
 iam_role_name             = "katopia-docker-ec2-role"
 iam_instance_profile_name = "katopia-docker-ec2-profile"
 iam_managed_policy_arns = [
@@ -111,9 +119,12 @@ asg_spring_target_group_key         = "spring"
 asg_spring_health_check_type        = "ELB"
 asg_spring_health_check_grace_period = 300
 asg_spring_user_data                = null
-asg_spring_ami_id                   = "ami-0338dae0d60ba723b"
+asg_spring_ami_id                   = "ami-0082046999159e1cc"
 asg_spring_instance_type            = null
 asg_spring_cpu_target_utilization   = 60
+asg_spring_tags = {
+  Name = "docker-spring"
+}
 
 asg_next_name                        = "katopia-docker-next-asg"
 asg_next_min_size                    = 1
@@ -123,6 +134,9 @@ asg_next_target_group_key            = "next"
 asg_next_health_check_type           = "ELB"
 asg_next_health_check_grace_period   = 300
 asg_next_user_data                   = null
-asg_next_ami_id                      = "ami-085a5c5173f8094cd"
+asg_next_ami_id                      = "ami-01f5809572292e4a4"
 asg_next_instance_type               = null
 asg_next_cpu_target_utilization      = 60
+asg_next_tags = {
+  Name = "docker-next"
+}

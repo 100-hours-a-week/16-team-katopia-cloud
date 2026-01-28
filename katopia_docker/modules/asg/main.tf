@@ -16,7 +16,7 @@ resource "aws_launch_template" "this" {
 
   tag_specifications {
     resource_type = "instance"
-    tags          = merge(var.tags, { Name = var.name })
+    tags          = merge({ Name = var.name }, var.tags)
   }
 }
 
@@ -36,7 +36,7 @@ resource "aws_autoscaling_group" "this" {
   }
 
   dynamic "tag" {
-    for_each = merge(var.tags, { Name = var.name })
+    for_each = merge({ Name = var.name }, var.tags)
     content {
       key                 = tag.key
       value               = tag.value

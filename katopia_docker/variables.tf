@@ -100,6 +100,44 @@ variable "key_name" {
   type        = string
 }
 
+variable "monitoring_ami_id" {
+  description = "AMI ID for the monitoring EC2 instance."
+  type        = string
+}
+
+variable "monitoring_instance_type" {
+  description = "Monitoring EC2 instance type override."
+  type        = string
+  default     = null
+}
+
+variable "monitoring_name" {
+  description = "Name tag for the monitoring EC2 instance."
+  type        = string
+  default     = "katopia-docker-monitoring"
+}
+
+variable "monitoring_security_group_name" {
+  description = "Monitoring security group name."
+  type        = string
+}
+
+variable "monitoring_iam_role_name" {
+  description = "IAM role name for monitoring EC2."
+  type        = string
+}
+
+variable "monitoring_iam_instance_profile_name" {
+  description = "IAM instance profile name for monitoring EC2."
+  type        = string
+}
+
+variable "monitoring_iam_managed_policy_arns" {
+  description = "Managed policy ARNs for monitoring EC2 role."
+  type        = list(string)
+  default     = []
+}
+
 variable "iam_role_name" {
   description = "IAM role name for EC2."
   type        = string
@@ -226,6 +264,12 @@ variable "asg_spring_cpu_target_utilization" {
   default     = 60
 }
 
+variable "asg_spring_tags" {
+  description = "Additional tags to apply to Spring ASG instances."
+  type        = map(string)
+  default     = {}
+}
+
 variable "asg_next_name" {
   description = "Next ASG name."
   type        = string
@@ -285,4 +329,10 @@ variable "asg_next_cpu_target_utilization" {
   description = "Next ASG CPU target utilization percentage."
   type        = number
   default     = 60
+}
+
+variable "asg_next_tags" {
+  description = "Additional tags to apply to Next ASG instances."
+  type        = map(string)
+  default     = {}
 }

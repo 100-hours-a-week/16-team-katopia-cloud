@@ -16,7 +16,7 @@ module "asg_spring" {
   health_check_type        = var.asg_spring_health_check_type
   health_check_grace_period = var.asg_spring_health_check_grace_period
   cpu_target_utilization   = var.asg_spring_cpu_target_utilization
-  tags                     = var.tags
+  tags                     = merge(var.tags, var.asg_spring_tags)
 }
 
 module "asg_next" {
@@ -37,5 +37,5 @@ module "asg_next" {
   health_check_type        = var.asg_next_health_check_type
   health_check_grace_period = var.asg_next_health_check_grace_period
   cpu_target_utilization   = var.asg_next_cpu_target_utilization
-  tags                     = var.tags
+  tags                     = merge(var.tags, var.asg_next_tags)
 }

@@ -6,5 +6,5 @@ resource "aws_instance" "this" {
   key_name               = var.key_name
   iam_instance_profile   = var.iam_instance_profile
 
-  tags = merge(var.tags, { Name = "katopia-docker-ec2" })
+  tags = merge(var.tags, { Name = var.name })
 }
