@@ -1,1 +1,6 @@
 .terraform/
+
+.env
+.env.example
+/.idea/
+/k6/images/
