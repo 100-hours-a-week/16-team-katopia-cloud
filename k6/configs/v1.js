@@ -11,6 +11,7 @@ export const ENDPOINTS = {
   POSTS: '/api/posts',
   POST_DETAIL: (id) => `/api/posts/${id}`,
   PRESIGNED_URL: '/api/uploads/presign',
+  COMMENTS: (postId) => `/api/posts/${postId}/comments`,
 };
 
 // 공통 헤더
@@ -36,8 +37,22 @@ export const LOAD_CONFIG = {
   STABLE_DURATION: '5m',  // 5분 유지
 };
 
+export const SCROLL_CONFIG = {
+  MAX_PAGES: 5,        // 최대 스크롤 페이지 수
+  PROBABILITY: 0.8,    // 스크롤 확률
+};
+
+
 // Thresholds 설정
 export const THRESHOLDS = {
   'http_req_duration': ['p(95)<500'],     // p95 < 500ms
   'http_req_failed': ['rate<0.01'],       // 실패율 < 1%
+
+  // 엔드포인트별 p95, p99
+  'http_req_duration{name:presigned_url}': ['p(95)<300', 'p(99)<500'],
+  'http_req_duration{name:s3_upload}': ['p(95)<1000', 'p(99)<2000'],
+  'http_req_duration{name:create_post}': ['p(95)<500', 'p(99)<800'],
+  'http_req_duration{name:search_posts}': ['p(95)<300', 'p(99)<500'],
+  'http_req_duration{name:get_post_list}': ['p(95)<300', 'p(99)<500'],
+  'http_req_duration{name:get_post_detail}': ['p(95)<300', 'p(99)<500'],
 };
