@@ -14,8 +14,8 @@ const SAMPLE_IMAGES = [
   '../images/sample1.jpg',
   '../images/sample2.jpg',
   '../images/sample3.jpg',
-  // '../images/sample4.jpg',
-  // '../images/sample5.jpg',
+  '../images/sample4.jpg',
+  '../images/sample5.jpg',
 ];
 
 // ⭐ init 단계에서 이미지를 미리 로드 (파일 최상단에서 실행)
@@ -44,4 +44,15 @@ export function generateTags() {
   }
   
   return tags;
+}
+
+export function generateCommentContent() {
+  const comments = [
+    '좋은 스타일이네요!',
+    '어디서 구매하셨어요?',
+    '코디 참고하겠습니다',
+    '멋있어요 👍',
+    '색감이 예쁘네요',
+  ];
+  return comments[Math.floor(Math.random() * comments.length)];
 }

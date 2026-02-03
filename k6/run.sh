@@ -32,7 +32,7 @@ echo "📍 BASE_URL: $BASE_URL"
 echo ""
 
 # k6 실행 (환경변수 명시적 전달)
-k6 run -e BASE_URL="$BASE_URL" -e TEST_TOKEN="$TEST_TOKEN" scenarios/v1-load-test.js
+k6 run -e BASE_URL="$BASE_URL" -e TEST_TOKEN="$TEST_TOKEN" scenarios/v1-big-load-test.js
 
 echo ""
 echo "✅ 테스트 완료!"

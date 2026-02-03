@@ -1,34 +1,23 @@
 // scenarios/load-test.js
 import { sleep } from 'k6';
-import { THRESHOLDS } from '../configs/v1.js';
+import { THRESHOLDS, LOAD_CONFIG, SCROLL_CONFIG } from '../configs/v1.js';
 import * as api from '../utils/requests.js';
 import * as checks from '../utils/checks.js';
 import * as data from '../utils/data.js';
 
 // 부하 모델링 설정
+function generateStages() {
+  const stages = [];
+  for (let vu = LOAD_CONFIG.INITIAL_VU; vu <= LOAD_CONFIG.MAX_VU; vu += LOAD_CONFIG.VU_INCREMENT) {
+    stages.push({ duration: LOAD_CONFIG.RAMP_DURATION, target: vu });
+  }
+  // 마지막에 유지 단계 추가
+  stages.push({ duration: LOAD_CONFIG.STABLE_DURATION, target: LOAD_CONFIG.MAX_VU });
+  return stages;
+}
+
 export const options = {
-  stages: [
-    { duration: '30s', target: 40 },   // 30초: 20 -> 40
-    { duration: '30s', target: 60 },   // 30초: 40 -> 60
-    { duration: '30s', target: 80 },   // 30초: 60 -> 80
-    { duration: '30s', target: 100 },  // 30초: 80 -> 100
-    { duration: '30s', target: 120 },  // 30초: 100 -> 120
-    { duration: '30s', target: 140 },  // 30초: 120 -> 140
-    { duration: '30s', target: 160 },  // 30초: 140 -> 160
-    { duration: '30s', target: 180 },  // 30초: 160 -> 180
-    { duration: '30s', target: 200 },  // 30초: 180 -> 200
-    { duration: '30s', target: 220 },  // 30초: 200 -> 220
-    { duration: '30s', target: 240 },  // 30초: 220 -> 240
-    { duration: '30s', target: 260 },  // 30초: 240 -> 260
-    { duration: '30s', target: 280 },  // 30초: 260 -> 280
-    { duration: '30s', target: 300 },  // 30초: 280 -> 300
-    { duration: '30s', target: 320 },  // 30초: 300 -> 320
-    { duration: '30s', target: 340 },  // 30초: 320 -> 340
-    { duration: '30s', target: 360 },  // 30초: 340 -> 360
-    { duration: '30s', target: 380 },  // 30초: 360 -> 380
-    { duration: '30s', target: 400 },  // 30초: 380 -> 400
-    { duration: '5m', target: 400 },   // 5분: 400 유지
-  ],
+  stages: generateStages(),
   thresholds: THRESHOLDS,
 };
 
@@ -41,30 +30,22 @@ export default function () {
   checks.checkSearchResult(res, 'search');
 
   const searchResult = res.json();
-  const posts = searchResult.posts || [];
+  const posts = searchResult.data?.posts || [];
   
    sleep(3);
   
   // 2. 인피니티 스크롤 (80%) - 페이지 2, 3 연속 호출
   if (Math.random() < 0.8 && posts.length > 0) {
-    const nextCursor = searchResult.nextCursor;
+    const cursor = searchResult.nextCursor;
     
-    if (nextCursor) {
-      // 페이지 2
-      res = api.searchPosts(keyword, 20, nextCursor);
-      checks.checkSearchResult(res, 'scroll_page2');
+    for (let page = 2; page <= SCROLL_CONFIG.MAX_PAGES && cursor; page++) {
+      res = api.searchPosts(keyword, 20, cursor);
+      checks.checkSearchResult(res, `scroll_page${page}`);
       
-      const page2Result = res.json();
-      const nextCursor2 = page2Result.nextCursor;
+      const result = res.json();
+      cursor = result.nextCursor;
       
       sleep(3);
-      
-      // 페이지 3
-      if (nextCursor2) {
-        res = api.searchPosts(keyword, 20, nextCursor2);
-        checks.checkSearchResult(res, 'scroll_page3');
-        sleep(3);
-      }
     }
   }
   
@@ -77,6 +58,14 @@ export default function () {
     res = api.getPostDetail(postId);
     checks.checkPostDetail(res, 'post_detail');
     sleep(3);
+
+    // 4. 댓글 작성 (60%) - 상세보기한 피드에 댓글 작성
+    if (Math.random() < 0.6) {
+      const commentContent = data.generateCommentContent();
+      res = api.createComment(postId, commentContent);
+      checks.checkCreated(res, 'create_comment');
+      sleep(3);
+    }
   }
   
   // 4. 피드 작성 (10%) - 이미지 업로드 포함
@@ -98,7 +87,7 @@ export default function () {
     }
     
     const uploadUrl = presignedData.data.files[0].uploadUrl;
-    const accessUrl = presignedData.data.files[0].accessUrl;
+    const imageObjectKey = presignedData.data.files[0].imageObjectKey;
     
     sleep(3);
     
@@ -111,10 +100,10 @@ export default function () {
     
     // 4-3. 피드 작성
     const content = data.generatePostContent();
-    const imageUrls = [accessUrl];
+    const imageObjectKeys = [imageObjectKey];
     const tags = data.generateTags();
     
-    res = api.createPost(content, imageUrls, tags);
+    res = api.createPost(content, imageObjectKeys, tags);
     checks.checkCreated(res, 'create_post');
     
     sleep(3);

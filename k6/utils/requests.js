@@ -26,17 +26,17 @@ export function uploadToS3(uploadUrl, imageData) {
     uploadUrl,
     imageData,
     {
-      headers: { 'Content-Type': 'image/jpeg' },
+      headers: { 'Content-Type': 'image/jpg' },
       tags: { name: 's3_upload' }
     }
   );
 }
 
 // 3. 피드 작성
-export function createPost(content, imageUrls, tags) {
+export function createPost(content, imageObjectKeys, tags) {
   const payload = JSON.stringify({
     content: content,
-    imageUrls: imageUrls,
+    imageObjectKeys: imageObjectKeys,
     tags: tags
   });
   
@@ -65,11 +65,11 @@ export function searchPosts(query, size = 20, after = null) {
 }
 
 // 5. 피드 목록 조회 (커서 기반 페이징)
-export function getPostList(cursor = null) {
-  let url = `${BASE_URL}${ENDPOINTS.POSTS}`;
+export function getPostList(after = null, size = 20) {
+  let url = `${BASE_URL}${ENDPOINTS.POSTS}?size=${size}`;
   
-  if (cursor) {
-    url += `?cursor=${encodeURIComponent(cursor)}`;
+  if (after) {
+    url += `&after=${encodeURIComponent(after)}`;
   }
   
   return http.get(url, { 
@@ -85,6 +85,22 @@ export function getPostDetail(postId) {
     { 
       headers: getHeaders(),
       tags: { name: 'get_post_detail' }
+    }
+  );
+}
+
+// 7. 댓글 작성
+export function createComment(postId, content) {
+  const payload = JSON.stringify({
+    content: content,
+  });
+  
+  return http.post(
+    `${BASE_URL}${ENDPOINTS.COMMENTS(postId)}`,
+    payload,
+    { 
+      headers: getHeaders(),
+      tags: { name: 'create_comment' }
     }
   );
 }
