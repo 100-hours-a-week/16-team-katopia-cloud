@@ -11,11 +11,11 @@ export function getRandomKeyword() {
 
 // 샘플 이미지 파일 경로
 const SAMPLE_IMAGES = [
-  '../images/sample1.jpg',
-  '../images/sample2.jpg',
-  '../images/sample3.jpg',
-  '../images/sample4.jpg',
-  '../images/sample5.jpg',
+  '../images/sample1.jpeg',
+  '../images/sample2.jpeg',
+  '../images/sample3.jpeg',
+  // '../images/sample4.jpg',
+  // '../images/sample5.jpg',
 ];
 
 // ⭐ init 단계에서 이미지를 미리 로드 (파일 최상단에서 실행)

@@ -80,10 +80,10 @@ export function checkPostList(response, name = 'post_list') {
 export function checkPostDetail(response, name = 'post_detail') {
   return check(response, {
     [`${name}: status is 200`]: (r) => r.status === 200,
-    [`${name}: has imageUrls`]: (r) => {
+    [`${name}: has imageObjectKeys`]: (r) => {
       try {
         const body = JSON.parse(r.body);
-        return body.data && Array.isArray(body.data.imageUrls);
+        return body.data && Array.isArray(body.data.imageObjectKeys);
       } catch (e) {
         return false;
       }
