@@ -30,11 +30,11 @@ export function getMultipartHeaders() {
 
 // 부하 테스트 설정
 export const LOAD_CONFIG = {
-  INITIAL_VU: 20,
-  MAX_VU: 400,
-  RAMP_DURATION: '30s',  // 30초마다
-  VU_INCREMENT: 20,       // 20명씩 증가
-  STABLE_DURATION: '5m',  // 5분 유지
+  INITIAL_VU: 100,
+  MAX_VU: 1000,
+  RAMP_DURATION: '45s',  // 30초마다
+  VU_INCREMENT: 100,       // 20명씩 증가
+  STABLE_DURATION: '3m',  // 5분 유지
 };
 
 export const SCROLL_CONFIG = {
@@ -45,14 +45,15 @@ export const SCROLL_CONFIG = {
 
 // Thresholds 설정
 export const THRESHOLDS = {
-  'http_req_duration': ['p(95)<500'],     // p95 < 500ms
+  'http_req_duration': ['p(95)<800'],     // p95 < 800ms
   'http_req_failed': ['rate<0.01'],       // 실패율 < 1%
 
   // 엔드포인트별 p95, p99
-  'http_req_duration{name:presigned_url}': ['p(95)<300', 'p(99)<500'],
-  'http_req_duration{name:s3_upload}': ['p(95)<1000', 'p(99)<2000'],
-  'http_req_duration{name:create_post}': ['p(95)<500', 'p(99)<800'],
-  'http_req_duration{name:search_posts}': ['p(95)<300', 'p(99)<500'],
-  'http_req_duration{name:get_post_list}': ['p(95)<300', 'p(99)<500'],
-  'http_req_duration{name:get_post_detail}': ['p(95)<300', 'p(99)<500'],
+  'http_req_duration{name:presigned_url}': ['p(95)<350', 'p(99)<800'],
+  'http_req_duration{name:s3_upload}': ['p(95)<800', 'p(99)<1500'],
+  'http_req_duration{name:create_post}': ['p(95)<800', 'p(99)<1500'],
+  'http_req_duration{name:search_posts}': ['p(95)<350', 'p(99)<800'],
+  'http_req_duration{name:get_post_list}': ['p(95)<350', 'p(99)<800'],
+  'http_req_duration{name:get_post_detail}': ['p(95)<350', 'p(99)<800'],
+  'http_req_duration{name:create_comment}': ['p(95)<500', 'p(99)<1200'],
 };

@@ -26,7 +26,7 @@ export function uploadToS3(uploadUrl, imageData) {
     uploadUrl,
     imageData,
     {
-      headers: { 'Content-Type': 'image/jpg' },
+      headers: { 'Content-Type': 'image/jpeg' },
       tags: { name: 's3_upload' }
     }
   );
