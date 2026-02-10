@@ -35,6 +35,39 @@ module "spring_security" {
       security_groups  = []
       prefix_list_ids  = []
       self             = false
+    },
+    {
+      description      = "Spring 6379"
+      from_port        = 6379
+      to_port          = 6379
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      security_groups  = []
+      prefix_list_ids  = []
+      self             = false
+    },
+    {
+      description      = "Spring 5672"
+      from_port        = 5672
+      to_port          = 5672
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      security_groups  = []
+      prefix_list_ids  = []
+      self             = false
+    },
+    {
+      description      = "Spring 3306"
+      from_port        = 3306
+      to_port          = 3306
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      security_groups  = []
+      prefix_list_ids  = []
+      self             = false
     }
   ]
   egress_rules = [
@@ -74,6 +107,85 @@ module "next_security" {
       description      = "Next 9100"
       from_port        = 9100
       to_port          = 9100
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      security_groups  = []
+      prefix_list_ids  = []
+      self             = false
+    }
+  ]
+  egress_rules = [
+    {
+      description      = "Allow all egress"
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      security_groups  = []
+      prefix_list_ids  = []
+      self             = false
+    }
+  ]
+  tags = var.tags
+}
+
+module "rabbitmq_security" {
+  source = "./modules/security"
+
+  vpc_id = module.network.vpc_id
+  name   = var.rabbitmq_security_group_name
+  ingress_rules = [
+    {
+      description      = "RabbitMQ 5672"
+      from_port        = 5672
+      to_port          = 5672
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      security_groups  = []
+      prefix_list_ids  = []
+      self             = false
+    },
+    {
+      description      = "RabbitMQ 15672"
+      from_port        = 15672
+      to_port          = 15672
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      security_groups  = []
+      prefix_list_ids  = []
+      self             = false
+    }
+  ]
+  egress_rules = [
+    {
+      description      = "Allow all egress"
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      security_groups  = []
+      prefix_list_ids  = []
+      self             = false
+    }
+  ]
+  tags = var.tags
+}
+
+module "redis_security" {
+  source = "./modules/security"
+
+  vpc_id = module.network.vpc_id
+  name   = var.redis_security_group_name
+  ingress_rules = [
+    {
+      description      = "Redis 6379"
+      from_port        = 6379
+      to_port          = 6379
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []

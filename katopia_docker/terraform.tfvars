@@ -21,6 +21,8 @@ spring_security_group_name = "katopia-docker-spring-sg"
 next_security_group_name   = "katopia-docker-next-sg"
 vpc_endpoint_security_group_name = "katopia-docker-vpce-sg"
 vpc_endpoint_name_prefix = "katopia-docker-vpce"
+rabbitmq_security_group_name = "katopia-docker-rabbitmq-sg"
+redis_security_group_name = "katopia-docker-redis-sg"
 
 security_group_ingress_rules = [
   {
@@ -73,6 +75,12 @@ monitoring_iam_managed_policy_arns = [
   "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
 ]
 
+rabbitmq_ami_id   = "ami-0adf44dd3def8f35b"
+rabbitmq_name     = "katopia-docker-rabbitmq"
+
+redis_ami_id   = "ami-0769e1c3df3ee7b01"
+redis_name     = "katopia-docker-redis"
+
 iam_role_name             = "katopia-docker-ec2-role"
 iam_instance_profile_name = "katopia-docker-ec2-profile"
 iam_managed_policy_arns = [
@@ -112,9 +120,9 @@ alb_path_rules = [
 ]
 
 asg_spring_name                     = "katopia-docker-spring-asg"
-asg_spring_min_size                 = 1
-asg_spring_max_size                 = 1
-asg_spring_desired_capacity         = 1
+asg_spring_min_size                 = 0
+asg_spring_max_size                 = 0
+asg_spring_desired_capacity         = 0
 asg_spring_target_group_key         = "spring"
 asg_spring_health_check_type        = "ELB"
 asg_spring_health_check_grace_period = 300
@@ -127,9 +135,9 @@ asg_spring_tags = {
 }
 
 asg_next_name                        = "katopia-docker-next-asg"
-asg_next_min_size                    = 1
-asg_next_max_size                    = 1
-asg_next_desired_capacity            = 1
+asg_next_min_size                    = 0
+asg_next_max_size                    = 0
+asg_next_desired_capacity            = 0
 asg_next_target_group_key            = "next"
 asg_next_health_check_type           = "ELB"
 asg_next_health_check_grace_period   = 300

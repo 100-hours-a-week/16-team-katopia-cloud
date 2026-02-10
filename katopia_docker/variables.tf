@@ -122,6 +122,50 @@ variable "monitoring_security_group_name" {
   type        = string
 }
 
+variable "rabbitmq_ami_id" {
+  description = "AMI ID for the RabbitMQ EC2 instance."
+  type        = string
+}
+
+variable "rabbitmq_instance_type" {
+  description = "RabbitMQ EC2 instance type override."
+  type        = string
+  default     = null
+}
+
+variable "rabbitmq_name" {
+  description = "Name tag for the RabbitMQ EC2 instance."
+  type        = string
+  default     = "katopia-docker-rabbitmq"
+}
+
+variable "rabbitmq_security_group_name" {
+  description = "RabbitMQ security group name."
+  type        = string
+}
+
+variable "redis_ami_id" {
+  description = "AMI ID for the Redis EC2 instance."
+  type        = string
+}
+
+variable "redis_instance_type" {
+  description = "Redis EC2 instance type override."
+  type        = string
+  default     = null
+}
+
+variable "redis_name" {
+  description = "Name tag for the Redis EC2 instance."
+  type        = string
+  default     = "katopia-docker-redis"
+}
+
+variable "redis_security_group_name" {
+  description = "Redis security group name."
+  type        = string
+}
+
 variable "monitoring_iam_role_name" {
   description = "IAM role name for monitoring EC2."
   type        = string
