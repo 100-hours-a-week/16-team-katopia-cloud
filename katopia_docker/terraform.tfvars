@@ -135,14 +135,14 @@ asg_spring_tags = {
 }
 
 asg_next_name                        = "katopia-docker-next-asg"
-asg_next_min_size                    = 0
-asg_next_max_size                    = 0
-asg_next_desired_capacity            = 0
+asg_next_min_size                    = 1
+asg_next_max_size                    = 1
+asg_next_desired_capacity            = 1
 asg_next_target_group_key            = "next"
 asg_next_health_check_type           = "ELB"
 asg_next_health_check_grace_period   = 300
 asg_next_user_data                   = null
-asg_next_ami_id                      = "ami-01f5809572292e4a4"
+asg_next_ami_id                      = "ami-059a854b65ec53e03"
 asg_next_instance_type               = null
 asg_next_cpu_target_utilization      = 60
 asg_next_tags = {
