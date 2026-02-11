@@ -120,14 +120,14 @@ alb_path_rules = [
 ]
 
 asg_spring_name                     = "katopia-docker-spring-asg"
-asg_spring_min_size                 = 0
-asg_spring_max_size                 = 0
-asg_spring_desired_capacity         = 0
+asg_spring_min_size                 = 1
+asg_spring_max_size                 = 1
+asg_spring_desired_capacity         = 1
 asg_spring_target_group_key         = "spring"
 asg_spring_health_check_type        = "ELB"
 asg_spring_health_check_grace_period = 300
 asg_spring_user_data                = null
-asg_spring_ami_id                   = "ami-0082046999159e1cc"
+asg_spring_ami_id                   = "ami-0f268089ef6b04089"
 asg_spring_instance_type            = null
 asg_spring_cpu_target_utilization   = 60
 asg_spring_tags = {
