@@ -97,7 +97,7 @@ alb_target_groups = {
     name                 = "katopia-docker-spring-tg-v2"
     port                 = 8080
     protocol             = "HTTP"
-    health_check_path    = "/actuator/health"
+    health_check_path    = "/api/actuator/health"
     health_check_matcher = "200"
   }
   next = {
