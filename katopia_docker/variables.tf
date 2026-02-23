@@ -224,11 +224,11 @@ variable "alb_certificate_arn" {
 variable "alb_target_groups" {
   description = "Target group definitions keyed by logical name."
   type = map(object({
-    name                  = string
-    port                  = number
-    protocol              = string
-    health_check_path     = string
-    health_check_matcher  = string
+    name                 = string
+    port                 = number
+    protocol             = string
+    health_check_path    = string
+    health_check_matcher = string
   }))
 }
 
@@ -245,6 +245,24 @@ variable "alb_path_rules" {
     path_patterns    = list(string)
   }))
   default = []
+}
+
+variable "existing_vpc_peering_connection_id" {
+  description = "Existing VPC peering connection ID to reuse for routing (e.g., pcx-xxxx)."
+  type        = string
+  default     = null
+}
+
+variable "peer_vpc_cidr_block" {
+  description = "CIDR block of the peered VPC reachable via the existing peering connection."
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
+variable "cdc_private_db_route_az" {
+  description = "AZ whose private-db route table should get the peering route for CDC."
+  type        = string
+  default     = "ap-northeast-2a"
 }
 
 variable "asg_spring_name" {
