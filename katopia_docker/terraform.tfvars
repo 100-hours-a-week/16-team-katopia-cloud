@@ -16,13 +16,13 @@ public_subnet_azs = [
   "ap-northeast-2c"
 ]
 
-alb_security_group_name = "katopia-docker-alb"
-spring_security_group_name = "katopia-docker-spring-sg"
-next_security_group_name   = "katopia-docker-next-sg"
+alb_security_group_name          = "katopia-docker-alb"
+spring_security_group_name       = "katopia-docker-spring-sg"
+next_security_group_name         = "katopia-docker-next-sg"
 vpc_endpoint_security_group_name = "katopia-docker-vpce-sg"
-vpc_endpoint_name_prefix = "katopia-docker-vpce"
-rabbitmq_security_group_name = "katopia-docker-rabbitmq-sg"
-redis_security_group_name = "katopia-docker-redis-sg"
+vpc_endpoint_name_prefix         = "katopia-docker-vpce"
+rabbitmq_security_group_name     = "katopia-docker-rabbitmq-sg"
+redis_security_group_name        = "katopia-docker-redis-sg"
 
 security_group_ingress_rules = [
   {
@@ -67,19 +67,19 @@ ami_id        = "ami-03fd85ef2fae79c05"
 instance_type = "t3.small"
 key_name      = "community"
 
-monitoring_ami_id               = "ami-07a52deed809c6cbf"
-monitoring_security_group_name  = "katopia-docker-monitoring-sg"
+monitoring_ami_id                    = "ami-07a52deed809c6cbf"
+monitoring_security_group_name       = "katopia-docker-monitoring-sg"
 monitoring_iam_role_name             = "katopia-docker-monitoring-ec2-role"
 monitoring_iam_instance_profile_name = "katopia-docker-monitoring-ec2-profile"
 monitoring_iam_managed_policy_arns = [
   "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
 ]
 
-rabbitmq_ami_id   = "ami-02a2699bda0f39bf9"
-rabbitmq_name     = "katopia-docker-rabbitmq"
+rabbitmq_ami_id = "ami-02a2699bda0f39bf9"
+rabbitmq_name   = "katopia-docker-rabbitmq"
 
-redis_ami_id   = "ami-0769e1c3df3ee7b01"
-redis_name     = "katopia-docker-redis"
+redis_ami_id = "ami-0769e1c3df3ee7b01"
+redis_name   = "katopia-docker-redis"
 
 iam_role_name             = "katopia-docker-ec2-role"
 iam_instance_profile_name = "katopia-docker-ec2-profile"
@@ -119,32 +119,35 @@ alb_path_rules = [
   }
 ]
 
-asg_spring_name                     = "katopia-docker-spring-asg"
-asg_spring_min_size                 = 1
-asg_spring_max_size                 = 1
-asg_spring_desired_capacity         = 1
-asg_spring_target_group_key         = "spring"
-asg_spring_health_check_type        = "ELB"
+asg_spring_name                      = "katopia-docker-spring-asg"
+asg_spring_min_size                  = 1
+asg_spring_max_size                  = 1
+asg_spring_desired_capacity          = 1
+asg_spring_target_group_key          = "spring"
+asg_spring_health_check_type         = "ELB"
 asg_spring_health_check_grace_period = 300
-asg_spring_user_data                = null
-asg_spring_ami_id                   = "ami-0fe7de418b0011dc6"
-asg_spring_instance_type            = null
-asg_spring_cpu_target_utilization   = 60
+asg_spring_user_data                 = null
+asg_spring_ami_id                    = "ami-0fe7de418b0011dc6"
+asg_spring_instance_type             = null
+asg_spring_cpu_target_utilization    = 60
 asg_spring_tags = {
   Name = "docker-spring"
 }
 
-asg_next_name                        = "katopia-docker-next-asg"
-asg_next_min_size                    = 1
-asg_next_max_size                    = 1
-asg_next_desired_capacity            = 1
-asg_next_target_group_key            = "next"
-asg_next_health_check_type           = "ELB"
-asg_next_health_check_grace_period   = 300
-asg_next_user_data                   = null
-asg_next_ami_id                      = "ami-059a854b65ec53e03"
-asg_next_instance_type               = null
-asg_next_cpu_target_utilization      = 60
+asg_next_name                      = "katopia-docker-next-asg"
+asg_next_min_size                  = 1
+asg_next_max_size                  = 1
+asg_next_desired_capacity          = 1
+asg_next_target_group_key          = "next"
+asg_next_health_check_type         = "ELB"
+asg_next_health_check_grace_period = 300
+asg_next_user_data                 = null
+asg_next_ami_id                    = "ami-059a854b65ec53e03"
+asg_next_instance_type             = null
+asg_next_cpu_target_utilization    = 60
 asg_next_tags = {
   Name = "docker-next"
 }
+
+existing_vpc_peering_connection_id = "pcx-0121b5026cc8a2f47"
+peer_vpc_cidr_block                = "10.0.0.0/16"
