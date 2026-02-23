@@ -75,7 +75,7 @@ monitoring_iam_managed_policy_arns = [
   "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
 ]
 
-rabbitmq_ami_id   = "ami-0adf44dd3def8f35b"
+rabbitmq_ami_id   = "ami-02a2699bda0f39bf9"
 rabbitmq_name     = "katopia-docker-rabbitmq"
 
 redis_ami_id   = "ami-0769e1c3df3ee7b01"
