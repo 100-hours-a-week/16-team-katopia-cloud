@@ -104,3 +104,20 @@ export function createComment(postId, content) {
     }
   );
 }
+
+// 8. 투표 생성
+export function createVote(title, imageObjectKeys) {
+  const payload = JSON.stringify({
+    title: title,
+    imageObjectKeys: imageObjectKeys,
+  });
+
+  return http.post(
+    `${BASE_URL}${ENDPOINTS.VOTES}`,
+    payload,
+    {
+      headers: getHeaders(),
+      tags: { name: 'create_vote' }
+    }
+  );
+}

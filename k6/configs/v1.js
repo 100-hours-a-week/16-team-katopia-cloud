@@ -9,6 +9,7 @@ export const TEST_TOKEN = __ENV.TEST_TOKEN || '';
 export const ENDPOINTS = {
   SEARCH: '/api/search/posts',
   POSTS: '/api/posts',
+  VOTES: '/api/votes',
   POST_DETAIL: (id) => `/api/posts/${id}`,
   PRESIGNED_URL: '/api/uploads/presign',
   COMMENTS: (postId) => `/api/posts/${postId}/comments`,
@@ -56,4 +57,5 @@ export const THRESHOLDS = {
   'http_req_duration{name:get_post_list}': ['p(95)<350', 'p(99)<800'],
   'http_req_duration{name:get_post_detail}': ['p(95)<350', 'p(99)<800'],
   'http_req_duration{name:create_comment}': ['p(95)<500', 'p(99)<1200'],
+  'http_req_duration{name:create_vote}': ['p(95)<500', 'p(99)<1200'],
 };
