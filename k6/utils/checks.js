@@ -24,6 +24,22 @@ export function checkCreated(response, name = 'create_post') {
   });
 }
 
+// 201 Created 체크 (투표 생성용)
+export function checkVoteCreated(response, name = 'create_vote') {
+  return check(response, {
+    [`${name}: status is 201`]: (r) => r.status === 201,
+    [`${name}: has id`]: (r) => {
+      try {
+        const body = JSON.parse(r.body);
+        if (body && body.id !== undefined) return true;
+        return body && body.data && body.data.id !== undefined;
+      } catch (e) {
+        return false;
+      }
+    },
+  });
+}
+
 // 200 OK 체크
 export function checkOK(response, name = 'request') {
   return check(response, {
