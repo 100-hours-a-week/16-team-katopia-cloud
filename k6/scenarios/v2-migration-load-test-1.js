@@ -105,8 +105,9 @@ function logFailureSample(response) {
 }
 
 function generateVoteTitle() {
+  const timestamp = new Date().toISOString();
   const iteration = __ITER + 1;
-  return `vote-${__VU}-${iteration}`;
+  return `vote-${__VU}-${iteration}-${timestamp}`;
 }
 
 export default function (setupData) {
