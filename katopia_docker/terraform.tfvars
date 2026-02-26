@@ -67,7 +67,7 @@ ami_id        = "ami-03fd85ef2fae79c05"
 instance_type = "t3.small"
 key_name      = "community"
 
-monitoring_ami_id                    = "ami-07a52deed809c6cbf"
+monitoring_ami_id                    = "ami-071af764ed2841f24"
 monitoring_security_group_name       = "katopia-docker-monitoring-sg"
 monitoring_iam_role_name             = "katopia-docker-monitoring-ec2-role"
 monitoring_iam_instance_profile_name = "katopia-docker-monitoring-ec2-profile"
@@ -75,10 +75,10 @@ monitoring_iam_managed_policy_arns = [
   "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
 ]
 
-rabbitmq_ami_id = "ami-02a2699bda0f39bf9"
+rabbitmq_ami_id = "ami-01e5228c597a8a2f5"
 rabbitmq_name   = "katopia-docker-rabbitmq"
 
-redis_ami_id = "ami-0769e1c3df3ee7b01"
+redis_ami_id = "ami-0c523def05491f16e"
 redis_name   = "katopia-docker-redis"
 
 iam_role_name             = "katopia-docker-ec2-role"
