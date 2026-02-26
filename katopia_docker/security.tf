@@ -26,7 +26,18 @@ module "spring_security" {
       self             = false
     },
     {
-      description      = "Spring 9100"
+      description      = "Spring Actuator 8080"
+      from_port        = 8080
+      to_port          = 8080
+      protocol         = "tcp"
+      cidr_blocks      = []
+      ipv6_cidr_blocks = []
+      security_groups  = [module.monitoring_security.security_group_id]
+      prefix_list_ids  = []
+      self             = false
+    },
+    {
+      description      = "Spring Node exporter 9100"
       from_port        = 9100
       to_port          = 9100
       protocol         = "tcp"
@@ -104,7 +115,7 @@ module "next_security" {
       self             = false
     },
     {
-      description      = "Next 9100"
+      description      = "Next Node exporter 9100"
       from_port        = 9100
       to_port          = 9100
       protocol         = "tcp"
@@ -158,6 +169,17 @@ module "rabbitmq_security" {
       security_groups  = []
       prefix_list_ids  = []
       self             = false
+    },
+    {
+      description      = "RabbitMQ Exporter 15692"
+      from_port        = 15692
+      to_port          = 15692
+      protocol         = "tcp"
+      cidr_blocks      = []
+      ipv6_cidr_blocks = []
+      security_groups  = [module.monitoring_security.security_group_id]
+      prefix_list_ids  = []
+      self             = false
     }
   ]
   egress_rules = [
@@ -190,6 +212,17 @@ module "redis_security" {
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       security_groups  = []
+      prefix_list_ids  = []
+      self             = false
+    },
+    {
+      description      = "Redis Exporter 9121"
+      from_port        = 9121
+      to_port          = 9121
+      protocol         = "tcp"
+      cidr_blocks      = []
+      ipv6_cidr_blocks = []
+      security_groups  = [module.monitoring_security.security_group_id]
       prefix_list_ids  = []
       self             = false
     }
