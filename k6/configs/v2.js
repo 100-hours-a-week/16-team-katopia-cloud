@@ -1,5 +1,5 @@
-// v1 환경에서 테스트 configs
-// utils/config.js
+// v2 환경에서 테스트 configs
+// sleep 0.5초, VU 1500까지 확장
 
 // 환경변수에서 설정 로드
 export const BASE_URL = __ENV.BASE_URL || 'http://localhost:8080';
@@ -29,20 +29,22 @@ export function getMultipartHeaders() {
   };
 }
 
-// 부하 테스트 설정
+// 부하 테스트 설정 (v2: sleep 0.5초 기준)
 export const LOAD_CONFIG = {
   INITIAL_VU: 100,
-  MAX_VU: 1500,
-  RAMP_DURATION: '45s',  // 30초마다
-  VU_INCREMENT: 100,       // 20명씩 증가
-  STABLE_DURATION: '3m',  // 5분 유지
+  MAX_VU: 1500,          // 1000에서 병목 발견, 1500까지 확장
+  RAMP_DURATION: '30s',  // 30초마다 증가
+  VU_INCREMENT: 100,     // 100명씩 증가 (세밀한 break point 파악)
+  STABLE_DURATION: '3m', // 최대 VU 3분 유지
 };
+
+// sleep 설정
+export const SLEEP_DURATION = 0.5;  // 0.5초 (v1: 3초)
 
 export const SCROLL_CONFIG = {
   MAX_PAGES: 5,        // 최대 스크롤 페이지 수
   PROBABILITY: 0.8,    // 스크롤 확률
 };
-
 
 // Thresholds 설정
 export const THRESHOLDS = {
